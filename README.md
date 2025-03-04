@@ -1,10 +1,16 @@
-# IAV_Sources_and_Sinks
+# Sources and sinks of influenza A virus genomic diversity in swine from 2009 to 2022 in the United States
 
-Data and R code used to run analyses for the manuscript "Sources and sinks of influenza A virus genomic diversity in swine from 2009 to 2022 in the United States". This manuscript is in prep.
+Data and R code used to run analyses for the manuscript "Sources and sinks of influenza A virus genomic diversity in swine from 2009 to 2022 in the United States".
+
+Janzen, G.M, Inderski, B.T., Chang, J., Arendsee, Z.W., Janas-Martindale, A., Torchetti, M.K., Baker, A.L., and Anderson, T.K. Sources and sinks of influenza A virus genomic diversity in swine from 2009 to 2022 in the United States. bioRxiv XX:XX.
 
 ## Description
 
 This manuscript summarizes 13 years of influenza A virus evolution in the swine host, focusing on the interplay between ecological concepts and swine agricultural practices, and offers tools for modeling the spread of novel virus strains across the US.
+
+## Abstract
+
+Influenza A virus (IAV) in swine in the U.S. is surveilled to monitor genetic evolution to inform intervention efforts and aid pandemic preparedness. We describe data from the U.S. Department of Agriculture National Surveillance Plan for Influenza A Virus in Pigs from 2009 to 2022. Clinical respiratory cases were subtyped followed by sequencing of hemagglutinin (HA) and neuraminidase (NA), and a subset of viruses were whole genome sequenced. Phylogenetic analysis identified geographic and temporal IAV reassortment hotspots. Regions acting as IAV genomic diversity sources or sinks were quantified, and dissemination was qualified and modeled. The dominant IAV clades were H1N2 (1B.2.1), H3N2 (1990.4.a), and H1N1 (H1-1A.3.3.3-c3). Internal genes were classified as triple-reassortant (T) or pandemic 2009 (P), and three genome constellations represented 73.5% of detections across the last two years. In some years, the distribution of IAV diversity was so narrowly distributed that it presented a statistical signal associated with local adaptation. We also demonstrated that the source of most IAV genomic diversity was in Midwest states (IL, MO, IA), and while this was correlated with swine inventory, the emergence and persistence of diversity was tied to swine transport across the U.S. The continued regional detection of unique HA, NA, and genome constellations provides support for targeted interventions to improve animal health and enhance pandemic preparedness.
 
 ## Getting Started
 
