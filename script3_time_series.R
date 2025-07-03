@@ -189,6 +189,11 @@ plot <- ggplot(data_usda_agg_mut, aes(y=Production, x=State)) +
 rm(plot)
 
 ##########################
+#Code used for a statistic in Flu54:
+sum(data_usda_agg[which(data_usda_agg$State %in% c("IN","IL","IA","CO","MN","NC","ND","SD","OK","NE",
+                                                   "AZ","HI","KS","KY","MI","PA","MT","TX","MO","OH",
+                                                   "TN","UT","VA","WI","WY")),]$Production)/sum(data_usda_agg$Production)
+##########################
 ### See where each constellation begins, and ends
 
 data_ss <- data_nona
@@ -325,7 +330,7 @@ plot2 <- ggplot(ss_usda_mut2_melt, aes(fill=variable, y=value, x=State)) +
   geom_bar(position="dodge", stat="identity") +
   scale_y_continuous(sec.axis = sec_axis(~.*scaleRight, name = stringr::str_to_sentence(paste0("Mean Annual ", production_name, " (million head)")),
                                          breaks=seq(0,max(ss_usda_mut2_melt[which(ss_usda_mut2_melt$variable == "Inventory"),]$value, na.rm=TRUE),5))) +
-  labs(title=paste0("IAV Diversity (Clade, Constellation) Sources and Sinks,\n ", dmin+window, " to ", dmax-window),
+  labs(title="", #paste0("IAV Diversity (Clade, Constellation) Sources and Sinks,\n ", dmin+window, " to ", dmax-window)
        x ="State",
        y = "Count")+
   theme(legend.title=element_blank());plot2
@@ -341,7 +346,7 @@ plot2 <- ggplot(ss_usda_mut2_melt, aes(fill=variable, y=value, x=State)) +
 # plot1_poster
 # dev.off()
 
-pdf("Plots/script3_begin_end_states_production.pdf")
+pdf("Plots/script3_begin_end_states_production.pdf",width=9, height=5)
 plot2
 dev.off()
 png("Plots/script3_begin_end_states_production.png", width=800, height=350)
@@ -472,6 +477,9 @@ dev.off()
 # dev.off()
 
 png("Plots/script3_begin_end_timeline_sort_nolabels.png", width = 900, height = 700)
+plot3_nolabels
+dev.off()
+pdf("Plots/script3_begin_end_timeline_sort_nolabels.pdf", width = 9, height = 9)
 plot3_nolabels
 dev.off()
 # 
