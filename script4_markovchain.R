@@ -223,8 +223,7 @@ hmplot_xx <- ggplot(tm_melt_xx_noxxorigin, aes(Destination, Origin, fill = Proba
 hmplot_repeat_xx <- ggplot(tm_melt_repeat_xx_noxxorigin, aes(Destination, Origin, fill = Probability)) +
   geom_tile(color = "black") +
   scale_fill_gradient(low="#CCFFFF", high="dodgerblue4") +
-  geom_tile() +
-  labs(title="Markov chain transition matrix");hmplot_repeat_xx
+  geom_tile() #+ labs(title="Markov chain transition matrix");hmplot_repeat_xx
 
 # pdf("Plots/script4_network_xx.pdf")
 # plot(est_xx)
