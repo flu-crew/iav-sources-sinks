@@ -446,8 +446,6 @@ temp <- rbind(temp1,temp2,temp3)
 data <- rbind(data, temp)
 rm(temp, tbl, repeated_barcodes)
 
-#These strains are erroneous, and are here fixed manually.
-#See the conversation with Tavis Anderson on Teams on 11/22/2023
 data[which(data$Strain == "A/swine/Tennessee/A01785435/2018"),]
 data$Subtype <- ifelse(data$Strain == "A/swine/Tennessee/A01785435/2018",  "H1N1", data$Subtype)
 data$Na_clade <- ifelse(data$Strain == "A/swine/Tennessee/A01785435/2018", "N1.C.3.2", data$Na_clade)
@@ -520,9 +518,6 @@ temp$Strain1 <- temp$Strain2 <- temp$StrainTest <- temp$Selection <- NULL
 data <- rbind(data, temp)
 rm(temp, selection)
 
-####################
-
-#These constellations have two subtypes or two constellations, we sort this out too.
 temp <- data[grep(",", data$Constellation), ]
 data <- data[-grep(",", data$Constellation), ] #taking out problem rows, to be added back in when fixed
 setDT(temp)[, paste0("Constellation",1:2) := tstrsplit(Constellation, ",")]
@@ -589,8 +584,7 @@ data$H3 <- ifelse(data$H3 == "2016-human like", "2016 human-like", data$H3)
 data$H3 <- ifelse(data$H3 == "Other-Human_2020", "2020 human-like", data$H3)
 data$N1 <- ifelse(data$N1 == "PDM", "pdm", data$N1)
 
-# #A H4N6 is included as an outgroup. We should remove it. #UPDATE: It's an outgroup, but still a real sample, so retain it.
-# data <- data[data$GL_Clade != "Outgroup",]
+# A H4N6 is included as an outgroup. It is still a real sample, so retain it.
 
 ### This has to be re-run, some of the internal gene columns are still deficient.
 data$PB2 <- substr(data$Constellation, 1, 1)
@@ -682,19 +676,26 @@ any(is.na(data$Constellation))
 data$Subtype <- ifelse(is.na(data$Subtype), "", data$Subtype)
 data$Constellation <- ifelse(is.na(data$Constellation) | data$Constellation == "", "------", data$Constellation)
 
+data[which(data$Subtype == ""),]
+data$H_simple <- ifelse(data$Subtype == "" & data$Ha_clade == "1A.3.3.2", "H1", data$H_simple)
+data$H_simple <- ifelse(data$Subtype == "" & data$Ha_clade == "1A.3.3.3-c3", "H1", data$H_simple)
+data$H_simple <- ifelse(data$Subtype == "" & data$Ha_clade == "1B.2.1", "H1", data$H_simple)
+data$H_simple <- ifelse(data$Subtype == "" & data$Ha_clade == "2010.1", "H3", data$H_simple)
+data$H_complex <- ifelse(data$Subtype == "" & data$H_simple == "H1", paste("H1-", data$Ha_clade, sep=""), data$H_complex)
+data$H_complex <- ifelse(data$Subtype == "" & data$H_simple == "H3", paste("H3-", data$Ha_clade, sep=""), data$H_complex)
+
 data$UID_simple <- paste0(data$Subtype, data$Constellation);table(data$UID_simple)
 data$UID_complex <- paste0(data$H_complex, data$N_complex, data$Constellation)
 data$H1 <- NULL; data$H3 <- NULL; data$H4 <- NULL; data$N1 <- NULL; data$N2 <- NULL; data$N6 <- NULL
 
 ##############################
 ##############################
-###############################For this publication, we set an end date of the data at December 31, 2022, dropping all data from 2023 and beyond
+##############################
+# For this publication, we set an end date of the data at December 31, 2022, dropping all data from 2023 and beyond
 dim(data)
 data <- data[which(as.numeric(data$Date_year) < 2023),]
 data <- data[order(data$Date),]
 dim(data)
-# data_dmax <- as.Date("2022-12-31") # this was written, treading the date cutoff above as if we have no knowledge after,
-# but we in fact do, so we don't need to use this date for the window calculation.
 ##########################
 
 
